@@ -1,7 +1,6 @@
 inputs = {
-  cidr_block = "10.0.0.0/21"
-  #log_destination = "arn:aws:s3:::logging-dev-bucket"
-  #log_destination = "arn:aws:s3:::logging-dev-chs-bucket/UCOP/"
+  cidr_block      = "10.0.0.0/21"
+  log_destination = "arn:aws:s3:::logging-dev-chs-bucket"
   name = join("-", [local.application, local.environment, "vpc"
   ])
   tags = {
