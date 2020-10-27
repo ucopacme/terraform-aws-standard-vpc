@@ -1,0 +1,41 @@
+# ssm vpc endpoint
+module "vpc_endpoint_ssm_shared_private" {
+  enabled             = "false"
+  name                = join("-", [var.application, var.environment, "ec2-instance-shared-private-ssm-endpoint"])
+  source              = "../../modules/vpc_endpoint"
+  tags                = module.net_dev_tgw_label.tags
+  private_dns_enabled = false
+  security_group_ids  = [module.shared_vpc_private_subnets_sg.id]
+  service_name        = "com.amazonaws.us-west-2.ssm"
+  subnet_ids          = module.shared_vpc_private_subnets.subnet_ids
+  vpc_endpoint_type   = "Interface"
+  vpc_id              = module.shared_vpc.vpc_id
+}
+
+# ssm messages vpc endpoint
+module "vpc_endpoint_ssm_messages_shared_private" {
+  enabled             = var.ec2_instance_shared_private_enabled
+  name                = join("-", [var.application, var.environment, "ssm-instance-shared-private-ssm-messages-endpoint"])
+  source              = "../../modules/vpc_endpoint"
+  tags                = module.net_dev_tgw_label.tags
+  private_dns_enabled = false
+  security_group_ids  = [module.shared_vpc_private_subnets_sg.id]
+  service_name        = "com.amazonaws.us-west-2.ssmmessages"
+  subnet_ids          = module.shared_vpc_private_subnets.subnet_ids
+  vpc_endpoint_type   = "Interface"
+  vpc_id              = module.shared_vpc.vpc_id
+}
+
+# ec2 messages vpc endpoint
+module "vpc_endpoint_ec2_messages_shared_private" {
+  enabled             = var.ec2_instance_shared_private_enabled
+  name                = join("-", [var.application, var.environment, "ec2-instance-shared-private-ec2-messages-endpoint"])
+  source              = "../../modules/vpc_endpoint"
+  tags                = module.net_dev_tgw_label.tags
+  private_dns_enabled = false
+  security_group_ids  = [module.shared_vpc_private_subnets_sg.id]
+  service_name        = "com.amazonaws.us-west-2.ec2messages"
+  subnet_ids          = module.shared_vpc_private_subnets.subnet_ids
+  vpc_endpoint_type   = "Interface"
+  vpc_id              = module.shared_vpc.vpc_id
+}

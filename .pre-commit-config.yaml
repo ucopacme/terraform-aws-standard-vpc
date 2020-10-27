@@ -1,0 +1,26 @@
+repos:
+  - repo: git://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.39.0
+    hooks:
+      - id: terraform_fmt
+      - id: terraform_docs
+      - id: terraform_docs_replace # Overwrite content of README.md with terraform-docs.
+      - id: terraform_validate # Validates all Terraform configuration files.
+      - id: terraform_tflint # Validates all Terraform configuration files with TFLint.
+      - id: terragrunt_fmt # Rewrites all Terragrunt configuration files to a canonical format.
+      - id: terragrunt_validate # Validates all Terragrunt configuration files.
+      - id: terraform_tfsec # Static analysis of Terraform templates to spot potential security issues.
+      - id: checkov # Runs checkov on Terraform templates.
+  - repo: git://github.com/pre-commit/pre-commit-hooks
+    rev: v3.2.0 # Use the ref you want to point at
+    hooks:
+      - id: check-merge-conflict
+      - id: check-json
+      - id: check-yaml
+      - id: detect-aws-credentials
+      - id: detect-private-key
+      - id: double-quote-string-fixer
+      - id: pretty-format-json
+        args:
+        - --autofix
+      - id: trailing-whitespace
