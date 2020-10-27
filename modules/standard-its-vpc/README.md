@@ -10,7 +10,6 @@ No provider.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| application | Application name, eg ucpath, applyuc, annualwage, etc | `string` | n/a | yes |
 | azs | Availability zones to occupy | `list(string)` | <pre>[<br>  "us-west-2a",<br>  "us-west-2b"<br>]</pre> | no |
 | cidr\_block | CIDR for VPC | `string` | n/a | yes |
 | data\_subnet\_index | index of data subnet | `number` | `4` | no |

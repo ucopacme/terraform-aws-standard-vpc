@@ -1,12 +1,12 @@
 # vpc
 module "vpc" {
-  cidr_block              = var.cidr_block
-  enabled                 = var.enabled
+  cidr_block        = var.cidr_block
+  enabled           = var.enabled
   enabled_flow_logs = var.enabled_flow_logs
-  log_destination         = var.log_destination
-  name                    = join("-", [var.name, "vpc"])
-  source                  = "./modules/vpc"
-  tags                    = merge(var.tags, map("Name", var.name))
+  log_destination   = var.log_destination
+  name              = join("-", [var.name, "vpc"])
+  source            = "./modules/vpc"
+  tags              = merge(var.tags, map("Name", var.name))
 }
 
 # vpc public subnets module
