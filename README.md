@@ -14,7 +14,16 @@ No provider.
 | cidr\_block | CIDR for VPC | `string` | n/a | yes |
 | data\_subnet\_index | index of data subnet | `number` | `4` | no |
 | enabled | Set to `false` to prevent the module from creating any resources | `bool` | `true` | no |
+| enabled\_data\_subnets | Set to `false` to prevent the module from creating data subnets | `bool` | `true` | no |
 | enabled\_flow\_logs | Set to `false` to prevent the module from adding flow log | `bool` | `true` | no |
+| enabled\_igw | Set to `false` to prevent the module from creating internet gateway | `bool` | `true` | no |
+| enabled\_igw\_route | Set to `false` to prevent the module from creating route for internet gateway | `bool` | `true` | no |
+| enabled\_private\_subnets | Set to `false` to prevent the module from creating private subnets | `bool` | `true` | no |
+| enabled\_public\_subnets | Set to `false` to prevent the module from creating public subnets | `bool` | `true` | no |
+| enabled\_route\_table | Set to `false` to prevent the module from creating vpc route table | `bool` | `true` | no |
+| enabled\_route\_table\_main\_route\_table\_association | Set to `false` to prevent the module from associating route table with main route table | `bool` | `true` | no |
+| enabled\_tgw\_subnets | Set to `false` to prevent the module from creating transit gateway subnets | `bool` | `true` | no |
+| igw\_route\_cidr | cidr destination for internet route gateway route | `string` | `"0.0.0.0/0"` | no |
 | log\_destination | vpc flow logs destination | `string` | n/a | yes |
 | name | name, to be used as prefix for all resource names | `string` | n/a | yes |
 | private\_subnet\_index | index of private subnet | `number` | `2` | no |

@@ -16,6 +16,60 @@ variable "enabled" {
   default     = true
 }
 
+variable "enabled_igw" {
+  type        = bool
+  description = "Set to `false` to prevent the module from creating internet gateway"
+  default     = true
+}
+
+variable "enabled_igw_route" {
+  type        = bool
+  description = "Set to `false` to prevent the module from creating route for internet gateway"
+  default     = true
+}
+
+variable "igw_route_cidr" {
+  description = "cidr destination for internet route gateway route"
+  type        = string
+  default     = "0.0.0.0/0"
+}
+
+variable "enabled_route_table" {
+  type        = bool
+  description = "Set to `false` to prevent the module from creating vpc route table"
+  default     = true
+}
+
+variable "enabled_route_table_main_route_table_association" {
+  type        = bool
+  description = "Set to `false` to prevent the module from associating route table with main route table"
+  default     = true
+}
+
+variable "enabled_data_subnets" {
+  type        = bool
+  description = "Set to `false` to prevent the module from creating data subnets"
+  default     = true
+}
+
+variable "enabled_private_subnets" {
+  type        = bool
+  description = "Set to `false` to prevent the module from creating private subnets"
+  default     = true
+}
+
+variable "enabled_public_subnets" {
+  type        = bool
+  description = "Set to `false` to prevent the module from creating public subnets"
+  default     = true
+}
+
+variable "enabled_tgw_subnets" {
+  type        = bool
+  description = "Set to `false` to prevent the module from creating transit gateway subnets"
+  default     = true
+}
+
 variable "enabled_flow_logs" {
   type        = bool
   description = "Set to `false` to prevent the module from adding flow log"
