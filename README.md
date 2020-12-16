@@ -24,7 +24,7 @@ No provider.
 | enabled\_route\_table\_main\_route\_table\_association | Set to `false` to prevent the module from associating route table with main route table | `bool` | `true` | no |
 | enabled\_tgw\_subnets | Set to `false` to prevent the module from creating transit gateway subnets | `bool` | `true` | no |
 | igw\_route\_cidr | cidr destination for internet route gateway route | `string` | `"0.0.0.0/0"` | no |
-| log\_destination | vpc flow logs destination | `string` | n/a | yes |
+| log\_destination | vpc flow logs destination | `string` | `null` | no |
 | name | name, to be used as prefix for all resource names | `string` | n/a | yes |
 | private\_subnet\_index | index of private subnet | `number` | `2` | no |
 | public\_subnet\_index | index of public subnet | `number` | `0` | no |
@@ -36,12 +36,13 @@ No provider.
 
 | Name | Description |
 |------|-------------|
+| data\_route\_table\_id | data route table id |
 | data\_subnet\_ids | list of data subnet ids |
 | igw\_id | internet gateway id |
-| igw\_route\_id | internet gateway route id |
-| main\_route\_table\_association\_id | route table id |
+| private\_route\_table\_id | private route table id |
 | private\_subnet\_ids | list of private subnet ids |
+| public\_route\_table\_id | public route table id |
 | public\_subnet\_ids | list of public subnet ids |
-| route\_table\_id | route table id |
+| tgw\_route\_table\_id | tgw route table id |
 | tgw\_subnet\_ids | list of tgw subnet ids |
 | vpc\_id | virtual private cloud id |
