@@ -1,12 +1,13 @@
 inputs = {
   cidr_block                                       = "10.0.0.0/21"
+  enabled                                          = false
   enabled_igw                                      = false
   enabled_igw_route                                = false
   enabled_route_table                              = false
   enabled_data_subnets                             = false
+  enabled_flow_logs                                = false
   enabled_public_subnets                           = false
   enabled_route_table_main_route_table_association = false
-  log_destination                                  = "arn:aws:s3:::logging-dev-chs-bucket"
   name = join("-", [local.application, local.environment, "vpc"
   ])
   tags = {
