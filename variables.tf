@@ -77,6 +77,7 @@ variable "enabled_flow_logs" {
 }
 
 variable "log_destination" {
+  default     = null
   description = "vpc flow logs destination"
   type        = string
 }
