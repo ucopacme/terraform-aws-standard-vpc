@@ -2,11 +2,10 @@ variable "cidr_block" {
   description = "CIDR for VPC"
   type        = string
 }
-
 variable "enabled" {
-  default     = true
-  description = "Set to `false` to prevent the module from creating any resources"
   type        = bool
+  description = "Set to `false` to prevent the module from creating any resources"
+  default     = true
 }
 
 variable "enabled_flow_logs" {

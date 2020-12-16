@@ -1,11 +1,7 @@
-locals {
-  enabled = var.enabled == "true"
-}
-
 # https://www.terraform.io/docs/providers/aws/r/customer_gateway.html
 resource "aws_customer_gateway" "this" {
   bgp_asn    = var.customer_gateway_bgp_asn
-  count      = local.enabled ? 1 : 0
+  count      = var.enabled ? 1 : 0
   ip_address = var.customer_gateway_ip_address
   tags       = merge(var.tags, map("Name", var.name))
   type       = "ipsec.1"
@@ -13,7 +9,7 @@ resource "aws_customer_gateway" "this" {
 
 # https://www.terraform.io/docs/providers/aws/r/vpn_connection.html
 resource "aws_vpn_connection" "this" {
-  count                 = local.enabled ? 1 : 0
+  count                 = var.enabled ? 1 : 0
   customer_gateway_id   = join("", aws_customer_gateway.this.*.id)
   static_routes_only    = var.vpn_connection_static_routes_only
   tags                  = merge(var.tags, map("Name", var.name))

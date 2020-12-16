@@ -1,9 +1,5 @@
-locals {
-  enabled = var.enabled == "true"
-}
-
 resource "aws_security_group" "this" {
-  count       = local.enabled ? 1 : 0
+  count       = var.enabled ? 1 : 0
   description = var.description
   name        = var.name
   tags        = merge(var.tags, map("Name", var.name))

@@ -1,9 +1,6 @@
-locals {
-  enabled = var.enabled == "true"
-}
 # VPC endpoint
 resource "aws_vpc_endpoint" "this" {
-  count = local.enabled ? length(var.availability_zones) : 0
+  count = var.enabled ? length(var.availability_zones) : 0
   tags  = merge(var.tags, map("Name", var.name))
 
   private_dns_enabled = var.private_dns_enabled

@@ -30,9 +30,9 @@ variable "dns_support" {
 }
 
 variable "enabled" {
-  type        = string
+  type        = bool
   description = "Set to `false` to prevent the module from creating any resources"
-  default     = "true"
+  default     = true
 }
 
 variable "name" {
@@ -42,9 +42,9 @@ variable "name" {
 }
 
 variable "ram_enabled" {
-  type        = string
+  type        = bool
   description = "Set to `true to enable ram"
-  default     = "false"
+  default     = false
 }
 
 variable "ram_principals" {

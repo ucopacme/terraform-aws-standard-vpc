@@ -1,13 +1,18 @@
 module "vpc" {
-  cidr_block        = "10.0.0.0/21"
-  enabled_flow_logs = false
-  name              = "junk"
-  tags              = merge(var.tags, map("Name", var.name))
-  source            = "./../../../../"
+  cidr_block              = "10.0.0.0/21"
+  enabled                 = var.enabled
+  enabled_data_subnets    = false
+  enabled_public_subnets  = true
+  enabled_private_subnets = true
+  enabled_tgw_subnets     = true
+  enabled_flow_logs       = false
+  name                    = "junk"
+  tags                    = merge(var.tags, map("Name", var.name))
+  source                  = "./../../../../"
 }
 
 resource "aws_security_group" "this" {
-  count       = 1
+  count       = var.enabled ? 1 : 0
   description = "junk security group to test ec2 canary with ssm"
   name        = var.name
   tags        = merge(var.tags, map("Name", var.name))
@@ -39,21 +44,21 @@ resource "aws_security_group" "this" {
 }
 
 module "ec2_role" {
-  enabled = true
-  name    = "junk-canary-orole"
+  enabled = var.enabled
+  name    = "junk-canary-role"
   tags    = merge(var.tags, map("Name", var.name))
   source  = "./../../../ec2_instance_profile/"
 }
 
 resource "aws_key_pair" "this" {
-  count      = var.my_pub_key != "" ? 1 : 0
+  count      = var.enabled && var.my_pub_key != "" ? 1 : 0
   key_name   = "my-incredible-canary-key"
   public_key = var.my_pub_key
 }
 
 module "ec2" {
   associate_public_ip_address = true
-  enabled                     = true
+  enabled                     = var.enabled
   iam_instance_profile        = module.ec2_role.iam_instance_profile
   #  key_name                    = aws_key_pair.this.key_name
   name               = "junk-canary"
@@ -63,12 +68,16 @@ module "ec2" {
   tags               = merge(var.tags, map("Name", var.name))
 }
 
+variable "enabled" {
+  description = "to be or not"
+  type        = bool
+  default     = true
+}
 variable "my_pub_key" {
   description = "public key material"
   type        = string
   default     = ""
 }
-
 variable "name" {
   description = "Resource name"
   type        = string

@@ -3,8 +3,6 @@ inputs = {
   associate_public_ip_address = true
   cidr_block                  = "10.0.0.0/21"
   enabled                     = true
-  enabled_data_subnets        = false
-  enabled_public_subnets      = true
   name = join("-", [local.application, local.environment, "network-canary"
   ])
   tags = {

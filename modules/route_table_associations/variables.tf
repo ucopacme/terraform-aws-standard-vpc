@@ -1,5 +1,5 @@
 variable "gateway_ids" {
-  default = []
+  default     = []
   description = "list of gateway Ids"
   type        = list(string)
 }
@@ -8,7 +8,7 @@ variable "route_table_id" {
   type        = string
 }
 variable "subnet_ids" {
-  default = []
+  default     = []
   description = "list of subnet Ids"
   type        = list(string)
 }

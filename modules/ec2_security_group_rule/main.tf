@@ -1,9 +1,5 @@
-locals {
-  enabled = var.enabled == "true"
-}
-
 resource "aws_security_group_rule" "this" {
-  count                    = local.enabled ? 1 : 0
+  count                    = var.enabled ? 1 : 0
   cidr_blocks              = var.cidr_blocks
   description              = var.description
   from_port                = var.from_port

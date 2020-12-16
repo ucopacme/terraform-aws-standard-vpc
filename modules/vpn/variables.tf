@@ -9,9 +9,9 @@ variable "tags" {
   type        = map(string)
 }
 variable "enabled" {
-  type        = string
+  type        = bool
   description = "Set to `false` to prevent the module from creating any resources"
-  default     = "true"
+  default     = true
 }
 
 variable "customer_gateway_bgp_asn" {

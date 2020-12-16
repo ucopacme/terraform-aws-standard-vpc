@@ -4,9 +4,9 @@ variable availability_zones {
   description = "List of AWS Availability zones to host subnets"
 }
 variable "enabled" {
-  type        = string
+  type        = bool
   description = "Set to `false` to prevent the module from creating any resources"
-  default     = "true"
+  default     = true
 }
 
 variable "name" {
