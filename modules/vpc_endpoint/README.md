@@ -13,7 +13,7 @@ No requirements.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | availability\_zones | List of AWS Availability zones to host subnets | `list` | <pre>[<br>  "us-west-2a",<br>  "us-west-2b"<br>]</pre> | no |
-| enabled | Set to `false` to prevent the module from creating any resources | `string` | `"true"` | no |
+| enabled | Set to `false` to prevent the module from creating any resources | `bool` | `true` | no |
 | name | Resource name | `string` | n/a | yes |
 | private\_dns\_enabled | enable private dns | `bool` | `true` | no |
 | security\_group\_ids | List of Security Group Ids | `list(string)` | `[]` | no |

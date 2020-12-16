@@ -25,7 +25,7 @@ No requirements.
 |------|-------------|------|---------|:--------:|
 | customer\_gateway\_bgp\_asn | The gateway's Border Gateway Protocol (BGP) Autonomous System Number (ASN) | `number` | `65000` | no |
 | customer\_gateway\_ip\_address | The IP address of the gateway's Internet-routable external interface | `string` | n/a | yes |
-| enabled | Set to `false` to prevent the module from creating any resources | `string` | `"true"` | no |
+| enabled | Set to `false` to prevent the module from creating any resources | `bool` | `true` | no |
 | name | Resource name | `string` | n/a | yes |
 | route\_table\_ids | The IDs of the route tables for which routes from the Virtual Private Gateway will be propagated | `list(string)` | `[]` | no |
 | tags | A map of tags to add to all resources | `map(string)` | `{}` | no |

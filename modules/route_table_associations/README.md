@@ -12,14 +12,10 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| enabled | Set to `false` to prevent the module from creating any resources | `string` | `"true"` | no |
-| name | Resource name | `string` | n/a | yes |
+| gateway\_ids | list of gateway Ids | `list(string)` | `[]` | no |
 | route\_table\_id | Route Table Id | `string` | n/a | yes |
-| tags | A map of tags to add to all resources | `map(string)` | `{}` | no |
-| vpc\_id | VPC Id | `string` | n/a | yes |
+| subnet\_ids | list of subnet Ids | `list(string)` | `[]` | no |
 
 ## Outputs
 
-| Name | Description |
-|------|-------------|
-| id | n/a |
+No output.

@@ -11,7 +11,7 @@ No provider.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | destination\_cidr\_block | route consolidation cidr | `string` | `"10.0.0.0/8"` | no |
-| enabled | Set to `false` to prevent the module from creating any resources | `string` | `"true"` | no |
+| enabled | Set to `false` to prevent the module from creating any resources | `bool` | `true` | no |
 | name\_route\_consolidation | name for route table consolidation | `string` | n/a | yes |
 | name\_tgw\_attachment | name for transit gateway attachment | `string` | n/a | yes |
 | name\_tgw\_route\_table\_association | name for transit gateway route table association | `string` | n/a | yes |

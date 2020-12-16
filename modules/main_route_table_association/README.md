@@ -12,7 +12,7 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| enabled | Set to `false` to prevent the module from creating any resources | `string` | `"true"` | no |
+| enabled | Set to `false` to prevent the module from creating any resources | `bool` | `true` | no |
 | name | Resource name | `string` | n/a | yes |
 | route\_table\_id | Route Table Id | `string` | n/a | yes |
 | tags | A map of tags to add to all resources | `map(string)` | `{}` | no |

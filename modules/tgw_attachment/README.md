@@ -12,7 +12,7 @@ No requirements.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| enabled | Set to `false` to prevent the module from creating any resources | `string` | `"true"` | no |
+| enabled | Set to `false` to prevent the module from creating any resources | `bool` | `true` | no |
 | name | Resource name | `string` | n/a | yes |
 | subnet\_ids | List of vpc subnet ids | `list` | n/a | yes |
 | tags | A map of tags to add to all resources | `map(string)` | `{}` | no |
@@ -25,4 +25,4 @@ No requirements.
 
 | Name | Description |
 |------|-------------|
-| tgw\_attachment\_id | n/a |
+| id | n/a |

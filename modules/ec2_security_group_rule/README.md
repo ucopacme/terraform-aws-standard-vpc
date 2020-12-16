@@ -14,7 +14,7 @@ No requirements.
 |------|-------------|------|---------|:--------:|
 | cidr\_blocks | List of CIDR blocks. Cannot be specified with source\_security\_group\_id | `list(string)` | `null` | no |
 | description | Resource description | `string` | n/a | yes |
-| enabled | Set to `false` to prevent the module from creating any resources | `string` | `"true"` | no |
+| enabled | Set to `false` to prevent the module from creating any resources | `bool` | `true` | no |
 | from\_port | (REQUIRED)  The start port (or ICMP type number if protocol is icmp or icmpv6 | `string` | n/a | yes |
 | ipv6\_cidr\_blocks | List of IPv6 CIDR blocks | `list(string)` | `[]` | no |
 | prefix\_list\_ids | List of prefix list IDs (for allowing access to VPC endpoints). Only valid with egress. | `list(string)` | `[]` | no |

@@ -13,7 +13,7 @@ No provider.
 | azs | Availability zones to occupy | `list(string)` | <pre>[<br>  "us-west-2a",<br>  "us-west-2b"<br>]</pre> | no |
 | cidr\_block | CIDR for VPC | `string` | n/a | yes |
 | data\_subnet\_index | index of data subnet | `number` | `4` | no |
-| enabled | Set to `false` to prevent the module from creating any resources | `string` | `"true"` | no |
+| enabled | Set to `false` to prevent the module from creating any resources | `bool` | `true` | no |
 | environment | environment, eg dev, qa, prod | `string` | n/a | yes |
 | name | name, to be used as prefix for all resource names | `string` | n/a | yes |
 | private\_subnet\_index | index of private subnet | `number` | `2` | no |
