@@ -8,6 +8,7 @@ module "tgw" {
   source                          = "./../../../"
   tags                            = merge(var.tags, map("Name", "testing"))
 }
+
 module "app_tgw_attachment" {
   enabled            = true
   name               = "app-tgw-attachment"
@@ -16,6 +17,7 @@ module "app_tgw_attachment" {
   transit_gateway_id = module.tgw.tgw_id
   vpc_id             = var.app_vpc_id
 }
+
 module "app_tgw_route_table" {
   enabled            = true
   name               = "app-tgw-route-table"
@@ -23,6 +25,7 @@ module "app_tgw_route_table" {
   transit_gateway_id = module.tgw.tgw_id
   tags               = merge(var.tags, map("Name", join("-", [var.name, "app"])))
 }
+
 module "app_vpc_private_subnet_route_to_tgw" {
   destination_cidr_block = var.destination_cidr_block
   enabled                = true
