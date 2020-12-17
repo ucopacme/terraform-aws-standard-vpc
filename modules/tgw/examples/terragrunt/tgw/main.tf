@@ -5,28 +5,28 @@ module "tgw" {
   name                            = "testing"
   ram_enabled                     = "false"
   ram_principals                  = []
-  source                          = "./../../"
+  source                          = "./../../../"
   tags                            = merge(var.tags, map("Name", "testing"))
 }
 module "app_tgw_attachment" {
   enabled            = true
   name               = "app-tgw-attachment"
-  source             = "./../../../tgw_attachment/"
-  subnet_ids         = module.vpc.tgw_subnet_ids
+  source             = "./../../../../tgw_attachment/"
+  subnet_ids         = var.app_tgw_subnet_ids
   transit_gateway_id = module.tgw.tgw_id
-  vpc_id             = module.vpc.vpc_id
+  vpc_id             = var.app_vpc_id
 }
 module "app_tgw_route_table" {
   enabled            = true
   name               = "app-tgw-route-table"
-  source             = "./../../../tgw_route_table/"
+  source             = "./../../../../tgw_route_table/"
   transit_gateway_id = module.tgw.tgw_id
   tags               = merge(var.tags, map("Name", join("-", [var.name, "app"])))
 }
 module "app_vpc_private_subnet_route_to_tgw" {
-  destination_cidr_block = "0.0.0.0/0"
+  destination_cidr_block = var.destination_cidr_block
   enabled                = true
-  source                 = "./../../../route/"
+  source                 = "./../../../../route/"
   route_table_id         = module.vpc.private_route_table_id
   transit_gateway_id     = module.tgw.tgw_id
 }

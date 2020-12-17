@@ -1,8 +1,15 @@
+dependency "app_vpc" {
+  config_path = "../vpcs/app/"
+}
+dependency "egress_vpc" {
+  config_path = "../vpcs/egress/"
+}
 inputs = {
-  ami                         = ""
-  associate_public_ip_address = true
-  cidr_block                  = "10.0.0.0/21"
-  enabled                     = true
+  app_private_route_table_id = dependency.app_vpc.outputs.private_route_table_id
+  app_tgw_subnet_ids         = dependency.app_vpc.outputs.tgw_subnet_ids
+  app_vpc_id                 = dependency.app_vpc.outputs.vpc_id
+  destination_cidr_block     = "0.0.0.0/0"
+  enabled                    = true
   name = join("-", [local.application, local.environment, "network-canary"
   ])
   ram_enabled    = local.ram_enabled
