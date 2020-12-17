@@ -27,7 +27,7 @@ module "app_vpc_private_subnet_route_to_tgw" {
   destination_cidr_block = var.destination_cidr_block
   enabled                = true
   source                 = "./../../../../route/"
-  route_table_id         = module.vpc.private_route_table_id
+  route_table_id         = var.app_vpc_private_route_table_id
   transit_gateway_id     = module.tgw.tgw_id
 }
 

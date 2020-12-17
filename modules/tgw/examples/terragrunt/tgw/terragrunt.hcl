@@ -5,11 +5,11 @@ dependency "egress_vpc" {
   config_path = "../vpcs/egress/"
 }
 inputs = {
-  app_private_route_table_id = dependency.app_vpc.outputs.private_route_table_id
-  app_tgw_subnet_ids         = dependency.app_vpc.outputs.tgw_subnet_ids
-  app_vpc_id                 = dependency.app_vpc.outputs.vpc_id
-  destination_cidr_block     = "0.0.0.0/0"
-  enabled                    = true
+  app_vpc_private_route_table_id = dependency.app_vpc.outputs.private_route_table_id
+  app_tgw_subnet_ids             = dependency.app_vpc.outputs.tgw_subnet_ids
+  app_vpc_id                     = dependency.app_vpc.outputs.vpc_id
+  destination_cidr_block         = "0.0.0.0/0"
+  enabled                        = true
   name = join("-", [local.application, local.environment, "network-canary"
   ])
   ram_enabled    = local.ram_enabled
