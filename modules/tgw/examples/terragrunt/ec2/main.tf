@@ -38,16 +38,28 @@ resource "aws_security_group" "this" {
 
 module "ec2" {
   associate_public_ip_address = true
-  enabled                     = var.enabled
+  enabled                     = var.enabled_public_ec2
   iam_instance_profile        = module.ec2_role.iam_instance_profile
-  #  key_name                    = aws_key_pair.this.key_name
-  name      = "junk-canary"
-  source    = "./../../../../ec2_instance/"
-  subnet_id = var.app_public_subnet_id
+  key_name                    = aws_key_pair.this[0].key_name
+  name                        = "junk-canary"
+  security_group_ids          = [aws_security_group.this[0].id]
+  source                      = "./../../../../ec2_instance/"
+  subnet_id                   = var.app_public_subnet_id
+  tags                        = merge(var.tags, map("Name", var.name))
+}
 
+module "private-ec2" {
+  associate_public_ip_address = false
+  enabled                     = var.enabled_private_ec2
+  iam_instance_profile        = module.ec2_role.iam_instance_profile
+  #key_name                    = aws_key_pair.this[0].key_name
+  name               = "private-canary"
   security_group_ids = [aws_security_group.this[0].id]
+  source             = "./../../../../ec2_instance/"
+  subnet_id          = var.app_private_subnet_id
   tags               = merge(var.tags, map("Name", var.name))
 }
+
 
 module "ec2_role" {
   enabled = var.enabled

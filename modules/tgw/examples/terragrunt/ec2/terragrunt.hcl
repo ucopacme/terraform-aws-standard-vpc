@@ -3,11 +3,13 @@ dependency "app-vpc" {
 }
 
 inputs = {
-  createdBy            = local.createdBy
-  enabled              = true
-  name                 = local.name
-  app_public_subnet_id = dependency.app-vpc.outputs.public_subnet_ids[0]
-  app_vpc_id           = dependency.app-vpc.outputs.vpc_id
+  createdBy             = local.createdBy
+  enabled               = true
+  enabled_public_ec2    = false
+  name                  = local.name
+  app_public_subnet_id  = dependency.app-vpc.outputs.public_subnet_ids[0]
+  app_private_subnet_id = dependency.app-vpc.outputs.private_subnet_ids[0]
+  app_vpc_id            = dependency.app-vpc.outputs.vpc_id
   tags = {
     "ucop:application" = local.application
     "ucop:createdBy"   = local.createdBy
