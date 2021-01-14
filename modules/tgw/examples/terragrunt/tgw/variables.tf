@@ -2,9 +2,9 @@ variable "app_vpc_id" {
   description = "app vpc id"
   type        = string
 }
-variable "app_vpc_private_route_table_id" {
+variable "app_vpc_private_route_table_ids" {
   description = "app vpc private route table id"
-  type        = string
+  type        = list(string)
 }
 variable "app_tgw_subnet_ids" {
   description = "app vpc tgw subnet ids for attachment"
@@ -14,6 +14,26 @@ variable "destination_cidr_block" {
   default     = "0.0.0.0/0"
   description = "default destination cidr block"
   type        = string
+}
+variable "egress_vpc_id" {
+  description = "egress vpc id"
+  type        = string
+}
+variable "egress_vpc_private_route_table_ids" {
+  description = "egress vpc private route table ids"
+  type        = list(string)
+}
+variable "egress_vpc_public_route_table_ids" {
+  description = "egress vpc public route table ids"
+  type        = list(string)
+}
+variable "egress_vpc_tgw_route_table_ids" {
+  description = "egress vpc tgw route table ids"
+  type        = list(string)
+}
+variable "egress_tgw_subnet_ids" {
+  description = "egress vpc tgw subnet ids for attachment"
+  type        = list(string)
 }
 variable "enabled" {
   description = "to be or not"
@@ -28,6 +48,10 @@ variable "my_pub_key" {
 variable "name" {
   description = "Resource name"
   type        = string
+}
+variable "nat_gw_ids" {
+  description = "list of nat gateway ids"
+  type        = list(string)
 }
 variable "tags" {
   default     = {}
