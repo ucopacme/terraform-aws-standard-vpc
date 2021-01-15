@@ -24,7 +24,7 @@ locals {
   createdBy   = "edna.mode@incredibl.es"
   environment = "prod"
   group       = "incredibles"
-  source      = "https://github.com/ucopacme/terraform-aws-vpn.git"
+  source      = "https://github.com/ucopacme/terraform-aws-standard-vpc.git"
 }
 
 terraform {
