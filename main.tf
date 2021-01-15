@@ -22,19 +22,18 @@ module "vpc_data_subnets" {
 }
 
 # data vpc route table
-module "data_vpc_route_table" {
-  enabled = var.enabled && var.enabled_data_subnets
-  name    = join("-", [var.name, "data-route-table"])
-  source  = "./modules/route_table"
-  tags    = merge(var.tags, map("Name", var.name))
-  vpc_id  = module.vpc.vpc_id
+resource "aws_route_table" "data_vpc_route_table" {
+  count  = var.enabled && var.enabled_data_subnets ? length(var.azs) : 0
+  tags   = merge(var.tags, map("Name", join("-", [var.name, "data-route-table", count.index])))
+  vpc_id = module.vpc.vpc_id
 }
 
-# associate data subnets with data route table
-module "data_vpc_route_table_subnet_associations" {
-  route_table_id = module.data_vpc_route_table.id
-  source         = "./modules/route_table_associations"
-  subnet_ids     = module.vpc_data_subnets.subnet_ids
+# associate data subnets with data route tables
+# Not taggable
+resource "aws_route_table_association" "data_subnet_associations" {
+  count          = var.enabled && var.enabled_data_subnets ? length(var.azs) : 0
+  subnet_id      = module.vpc_data_subnets.subnet_ids[count.index]
+  route_table_id = aws_route_table.data_vpc_route_table[count.index].id
 }
 
 # vpc private subnets module
@@ -50,19 +49,18 @@ module "vpc_private_subnets" {
 }
 
 # private vpc route table
-module "private_vpc_route_table" {
-  enabled = var.enabled && var.enabled_private_subnets
-  name    = join("-", [var.name, "private-route-table"])
-  source  = "./modules/route_table"
-  tags    = merge(var.tags, map("Name", var.name))
-  vpc_id  = module.vpc.vpc_id
+resource "aws_route_table" "private_vpc_route_table" {
+  count  = var.enabled && var.enabled_private_subnets ? length(var.azs) : 0
+  tags   = merge(var.tags, map("Name", join("-", [var.name, "private-route-table", count.index])))
+  vpc_id = module.vpc.vpc_id
 }
 
-# associate private subnets with private route table
-module "private_vpc_route_table_subnet_associations" {
-  route_table_id = module.private_vpc_route_table.id
-  source         = "./modules/route_table_associations"
-  subnet_ids     = module.vpc_private_subnets.subnet_ids
+# associate private subnets with private route tables
+# Not taggable
+resource "aws_route_table_association" "private_subnet_associations" {
+  count          = var.enabled && var.enabled_private_subnets ? length(var.azs) : 0
+  subnet_id      = module.vpc_private_subnets.subnet_ids[count.index]
+  route_table_id = aws_route_table.private_vpc_route_table[count.index].id
 }
 
 # vpc public subnets module
@@ -78,28 +76,27 @@ module "vpc_public_subnets" {
 }
 
 # public vpc route table
-module "public_vpc_route_table" {
-  enabled = var.enabled && var.enabled_public_subnets
-  name    = join("-", [var.name, "public-route-table"])
-  source  = "./modules/route_table"
-  tags    = merge(var.tags, map("Name", var.name))
-  vpc_id  = module.vpc.vpc_id
+resource "aws_route_table" "public_vpc_route_table" {
+  count  = var.enabled && var.enabled_public_subnets ? length(var.azs) : 0
+  tags   = merge(var.tags, map("Name", join("-", [var.name, "public-route-table", count.index])))
+  vpc_id = module.vpc.vpc_id
 }
 
-# associate public subnets with public route table
-module "public_vpc_route_table_subnet_associations" {
-  route_table_id = module.public_vpc_route_table.id
-  source         = "./modules/route_table_associations"
-  subnet_ids     = module.vpc_public_subnets.subnet_ids
+# associate public subnets with public route tables
+# Not taggable
+resource "aws_route_table_association" "public_subnet_associations" {
+  count          = var.enabled && var.enabled_public_subnets ? length(var.azs) : 0
+  subnet_id      = module.vpc_public_subnets.subnet_ids[count.index]
+  route_table_id = aws_route_table.public_vpc_route_table[count.index].id
 }
 
 # public vpc route to igw
-module "public_vpc_route_to_igw" {
+# Not taggable
+resource "aws_route" "this" {
+  count                  = var.enabled && var.enabled_public_subnets && var.enabled_igw && var.enabled_igw_route ? length(var.azs) : 0
   destination_cidr_block = var.igw_route_cidr
-  enabled                = var.enabled && var.enabled_public_subnets && var.enabled_igw && var.enabled_igw_route
   gateway_id             = module.vpc_igw.id
-  route_table_id         = module.public_vpc_route_table.id
-  source                 = "./modules/route"
+  route_table_id         = aws_route_table.public_vpc_route_table[count.index].id
 }
 
 # vpc tgw subnets module
@@ -115,19 +112,17 @@ module "vpc_tgw_subnets" {
 }
 
 # tgw vpc route table
-module "tgw_vpc_route_table" {
-  enabled = var.enabled && var.enabled_tgw_subnets
-  name    = join("-", [var.name, "tgw-route-table"])
-  source  = "./modules/route_table"
-  tags    = merge(var.tags, map("Name", var.name))
-  vpc_id  = module.vpc.vpc_id
+resource "aws_route_table" "tgw_vpc_route_table" {
+  count  = var.enabled && var.enabled_tgw_subnets ? length(var.azs) : 0
+  tags   = merge(var.tags, map("Name", join("-", [var.name, "tgw-route-table", count.index])))
+  vpc_id = module.vpc.vpc_id
 }
 
-#associate tgw subnets with tgw route table
-module "tgw_vpc_route_table_subnet_associations" {
-  route_table_id = module.tgw_vpc_route_table.id
-  source         = "./modules/route_table_associations"
-  subnet_ids     = module.vpc_tgw_subnets.subnet_ids
+# associate tgw subnets with tgw route tables
+resource "aws_route_table_association" "tgw_subnet_associations" {
+  count          = var.enabled && var.enabled_tgw_subnets ? length(var.azs) : 0
+  subnet_id      = module.vpc_tgw_subnets.subnet_ids[count.index]
+  route_table_id = aws_route_table.tgw_vpc_route_table[count.index].id
 }
 
 # vpc internet gateway
