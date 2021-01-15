@@ -4,7 +4,9 @@ No requirements.
 
 ## Providers
 
-No provider.
+| Name | Version |
+|------|---------|
+| aws | n/a |
 
 ## Inputs
 
@@ -36,13 +38,13 @@ No provider.
 
 | Name | Description |
 |------|-------------|
-| data\_route\_table\_id | data route table id |
+| data\_route\_table\_ids | data route table ids |
 | data\_subnet\_ids | list of data subnet ids |
 | igw\_id | internet gateway id |
-| private\_route\_table\_id | private route table id |
+| private\_route\_table\_ids | private route table ids |
 | private\_subnet\_ids | list of private subnet ids |
-| public\_route\_table\_id | public route table id |
+| public\_route\_table\_ids | public route table ids |
 | public\_subnet\_ids | list of public subnet ids |
-| tgw\_route\_table\_id | tgw route table id |
+| tgw\_route\_table\_ids | tgw route table ids |
 | tgw\_subnet\_ids | list of tgw subnet ids |
 | vpc\_id | virtual private cloud id |
