@@ -25,7 +25,7 @@ tfenv use 0.12.29
 ## gitrdone
 
 This will build a sample transit gateway with an egress vpc hosting public nat
-gateways and and a "app" vpc to host an ec2 for testing via ssm.
+gateways and and an "app" vpc to host an ec2 for testing via ssm.
 
 ```
 #get credentials in account you want to deploy this solution to
