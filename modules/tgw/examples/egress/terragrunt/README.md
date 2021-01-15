@@ -4,8 +4,8 @@
 Cost of nat gateways in multiple accounts, multiple vpcs and multiple zones vs
 cost to attach multiple vpcs to a transit gateway favor aggregation of nat
 gateways in a single "egress" vpc to serve as a common egress to the internet.
-NOTE: this is not about aggregation application traffic or access, this is more
-about providing access for supporting services like patching.
+NOTE: this is not about access to or aggregation of application traffic, this is
+more about providing access to supporting services like patching of ec2.
 
 ## prereq
 
@@ -68,7 +68,7 @@ Ever feel cheated?
 terragrunt  graph-dependencies | dot -Tpng > images/egress.png
 ```
 
-## Hygeine
+## Hygiene
 ```
 # Clean up after your self
 terragrunt apply-all -auto-approve
