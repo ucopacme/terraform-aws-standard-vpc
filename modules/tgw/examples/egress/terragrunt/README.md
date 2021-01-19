@@ -71,5 +71,5 @@ terragrunt  graph-dependencies | dot -Tpng > images/egress.png
 ## Hygiene
 ```
 # Clean up after your self
-terragrunt apply-all -auto-approve
+ terragrunt destroy-all
 ```
