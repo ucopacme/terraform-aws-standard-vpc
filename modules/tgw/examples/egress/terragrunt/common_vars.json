@@ -1,0 +1,8 @@
+{
+"tags": {
+"application": "tgw-egress-sample",
+"environment": "dev",
+"group": "incredibles",
+"source": "https://github.com/ucopacme/terraform-aws-standard-vpc/tree/master/modules/tgw/examples/egress/terragrunt"
+}
+}

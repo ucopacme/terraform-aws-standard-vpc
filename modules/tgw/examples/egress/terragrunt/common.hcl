@@ -7,3 +7,8 @@ inputs = {
     "ucop:source"      = join("/", ["https://github.com/ucopacme/terraform-aws-standard-vpc/tree/master/modules/tgw/examples/egress/terragrunt", path_relative_to_include()])
   }
 }
+
+locals {
+  common_vars = jsondecode(file("common_vars.json"))
+  tags        = local.common_vars.tags
+}
