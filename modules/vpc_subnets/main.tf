@@ -11,7 +11,7 @@ resource "aws_subnet" "this" {
   cidr_block              = cidrsubnet(var.subnet_cidr, var.new_bits, count.index)
   count                   = var.enabled ? length(var.availability_zones) : 0
   map_public_ip_on_launch = false
-  tags                    = merge(var.tags, map("Name", join("-", [var.name, count.index])))
+  tags                    = merge(var.tags, tomap({"Name" = join("-", [var.name, count.index])}))
 
   vpc_id = var.vpc_id
 }
