@@ -63,7 +63,7 @@ resource "aws_instance" "this" {
   }
   source_dest_check      = var.source_dest_check
   subnet_id              = var.subnet_id
-  tags                   = merge(var.tags, map("Name", var.name))
+  tags                   = merge(var.tags, tomap({"Name" = var.name}))
   user_data              = var.user_data
   user_data_base64       = var.user_data_base64
   vpc_security_group_ids = var.security_group_ids

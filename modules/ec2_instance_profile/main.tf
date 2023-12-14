@@ -15,7 +15,7 @@ resource "aws_iam_role" "this" {
   assume_role_policy = data.aws_iam_policy_document.this.json
   count              = var.enabled ? 1 : 0
   name               = var.name
-  tags               = merge(var.tags, map("Name", var.name))
+  tags               = merge(var.tags, tomap({"Name" = var.name}))
 }
 
 resource "aws_iam_policy_attachment" "this" {

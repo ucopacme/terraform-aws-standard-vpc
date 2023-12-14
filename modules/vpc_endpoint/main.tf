@@ -1,7 +1,7 @@
 # VPC endpoint
 resource "aws_vpc_endpoint" "this" {
   count = var.enabled ? length(var.availability_zones) : 0
-  tags  = merge(var.tags, map("Name", var.name))
+  tags  = merge(var.tags, tomap({"Name" = var.name}))
 
   private_dns_enabled = var.private_dns_enabled
   security_group_ids  = var.security_group_ids

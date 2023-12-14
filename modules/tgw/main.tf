@@ -6,14 +6,14 @@ resource "aws_ec2_transit_gateway" "this" {
   default_route_table_propagation = var.default_route_table_propagation
   description                     = var.description
   dns_support                     = var.dns_support
-  tags                            = merge(var.tags, map("Name", var.name))
+  tags                            = merge(var.tags, tomap({"Name" = var.name}))
   vpn_ecmp_support                = var.vpn_ecmp_support
 }
 
 resource "aws_ram_resource_share" "this" {
   count = var.ram_enabled ? 1 : 0
   name  = var.name
-  tags  = merge(var.tags, map("Name", var.name))
+  tags  = merge(var.tags, tomap({"Name" = var.name}))
 }
 
 resource "aws_ram_resource_association" "this" {

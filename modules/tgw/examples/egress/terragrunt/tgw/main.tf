@@ -7,7 +7,7 @@ module "tgw" {
   ram_enabled                     = "false"
   ram_principals                  = []
   source                          = "./../../../../"
-  tags                            = merge(var.tags, map("Name", "testing"))
+  tags                            = merge(var.tags, tomap({"Name" = "testing"}))
 }
 
 # attach app vpc to tgw
@@ -53,7 +53,7 @@ module "egress_tgw_route_table" {
   name               = "egress-tgw-route-table"
   source             = "./../../../../../tgw_route_table/"
   transit_gateway_id = module.tgw.tgw_id
-  tags               = merge(var.tags, map("Name", join("-", [var.name, "egress"])))
+  tags               = merge(var.tags, tomap({"Name" = join("-", [var.name, "egress"])}))
 }
 
 # propagate egress vpc route to egresss tgw route table

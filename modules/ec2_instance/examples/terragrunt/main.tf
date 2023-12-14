@@ -7,7 +7,7 @@ module "vpc" {
   enabled_tgw_subnets     = true
   enabled_flow_logs       = false
   name                    = "junk"
-  tags                    = merge(var.tags, map("Name", var.name))
+  tags                    = merge(var.tags, tomap({"Name" = var.name}))
   source                  = "./../../../../"
 }
 
@@ -15,7 +15,7 @@ resource "aws_security_group" "this" {
   count       = var.enabled ? 1 : 0
   description = "junk security group to test ec2 canary with ssm"
   name        = var.name
-  tags        = merge(var.tags, map("Name", var.name))
+  tags        = merge(var.tags, tomap({"Name" = var.name}))
   vpc_id      = module.vpc.vpc_id
 
   #  ingress {
@@ -46,7 +46,7 @@ resource "aws_security_group" "this" {
 module "ec2_role" {
   enabled = var.enabled
   name    = "junk-canary-role"
-  tags    = merge(var.tags, map("Name", var.name))
+  tags    = merge(var.tags, tomap({"Name" = var.name}))
   source  = "./../../../ec2_instance_profile/"
 }
 
@@ -65,7 +65,7 @@ module "ec2" {
   source             = "./../../"
   subnet_id          = module.vpc.public_subnet_ids[0]
   security_group_ids = [aws_security_group.this[0].id]
-  tags               = merge(var.tags, map("Name", var.name))
+  tags               = merge(var.tags, tomap({"Name" = var.name}))
 }
 
 variable "enabled" {

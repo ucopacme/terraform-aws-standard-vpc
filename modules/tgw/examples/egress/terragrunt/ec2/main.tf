@@ -8,7 +8,7 @@ resource "aws_security_group" "this" {
   count       = var.enabled ? 1 : 0
   description = "junk security group to test ec2 canary with ssm"
   name        = var.name
-  tags        = merge(var.tags, map("Name", var.name))
+  tags        = merge(var.tags, tomap({"Name" = var.name}))
   vpc_id      = var.app_vpc_id
 
   #  ingress {
@@ -45,7 +45,7 @@ module "ec2" {
   security_group_ids = [aws_security_group.this[0].id]
   source             = "./../../../../../ec2_instance/"
   subnet_id          = var.app_public_subnet_ids[0]
-  tags               = merge(var.tags, map("Name", var.name))
+  tags               = merge(var.tags, tomap({"Name" = var.name}))
 }
 
 module "private-ec2" {
@@ -57,13 +57,13 @@ module "private-ec2" {
   security_group_ids = [aws_security_group.this[0].id]
   source             = "./../../../../../ec2_instance/"
   subnet_id          = var.app_private_subnet_ids[0]
-  tags               = merge(var.tags, map("Name", var.name))
+  tags               = merge(var.tags, tomap({"Name" = var.name}))
 }
 
 
 module "ec2_role" {
   enabled = var.enabled
   name    = "junk-canary-role"
-  tags    = merge(var.tags, map("Name", var.name))
+  tags    = merge(var.tags, tomap({"Name" = var.name}))
   source  = "./../../../../../ec2_instance_profile/"
 }

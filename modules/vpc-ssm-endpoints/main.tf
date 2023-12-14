@@ -3,7 +3,7 @@ resource "aws_customer_gateway" "this" {
   bgp_asn    = var.customer_gateway_bgp_asn
   count      = var.enabled ? 1 : 0
   ip_address = var.customer_gateway_ip_address
-  tags       = merge(var.tags, map("Name", var.name))
+  tags       = merge(var.tags, tomap({"Name" = var.name}))
   type       = "ipsec.1"
 }
 
@@ -12,7 +12,7 @@ resource "aws_vpn_connection" "this" {
   count                 = var.enabled ? 1 : 0
   customer_gateway_id   = join("", aws_customer_gateway.this.*.id)
   static_routes_only    = var.vpn_connection_static_routes_only
-  tags                  = merge(var.tags, map("Name", var.name))
+  tags                  = merge(var.tags, tomap({"Name" = var.name}))
   transit_gateway_id    = var.transit_gateway_id
   tunnel1_inside_cidr   = var.vpn_connection_tunnel1_inside_cidr
   tunnel1_preshared_key = var.vpn_connection_tunnel1_preshared_key

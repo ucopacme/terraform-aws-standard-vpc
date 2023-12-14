@@ -2,7 +2,7 @@ resource "aws_security_group" "this" {
   count       = var.enabled ? 1 : 0
   description = var.description
   name        = var.name
-  tags        = merge(var.tags, map("Name", var.name))
+  tags        = merge(var.tags, tomap({"Name" = var.name}))
   vpc_id      = var.vpc_id
 
   ingress {
