@@ -17,6 +17,7 @@ No requirements.
 | name | Resource name | `string` | n/a | yes |
 | new\_bits | number of additional bits with which to extend the subnet CIDR prefix | `string` | n/a | yes |
 | subnet\_cidr | Subnet CIDR prefix | `string` | n/a | yes |
+| explicit\_subnet\_cidrs | Explicit list of CIDRs to assign to subnets (overrides new\_bits and subnet\_cidr if specified) | `list(string)` | null | no |
 | tags | A map of tags to add to all resources | `map(string)` | `{}` | no |
 | vpc\_id | VPC ID. | `string` | n/a | yes |
 

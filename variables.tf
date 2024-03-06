@@ -141,6 +141,30 @@ variable "data_subnet_tier_bits" {
   description = "number of bits to allocate to data subnet tier (instead of using generic subnet_tier_bits)"
 }
 
+variable "public_subnet_cidrs" {
+  default     = null
+  type        = list(string)
+  description = "Explcit list of CIDRs to assign to subnets (alternative to embedded cidrsubnet calls)"
+}
+
+variable "tgw_subnet_cidrs" {
+  default     = null
+  type        = list(string)
+  description = "Explcit list of CIDRs to assign to subnets (alternative to embedded cidrsubnet calls)"
+}
+
+variable "private_subnet_cidrs" {
+  default     = null
+  type        = list(string)
+  description = "Explcit list of CIDRs to assign to subnets (alternative to embedded cidrsubnet calls)"
+}
+
+variable "data_subnet_cidrs" {
+  default     = null
+  type        = list(string)
+  description = "Explcit list of CIDRs to assign to subnets (alternative to embedded cidrsubnet calls)"
+}
+
 variable "tags" {
   default     = {}
   description = "A map of tags to add to all resources"

@@ -11,14 +11,15 @@ module "vpc" {
 
 # vpc data subnets module
 module "vpc_data_subnets" {
-  availability_zones = var.azs
-  enabled            = var.enabled && var.enabled_data_subnets
-  name               = join("-", [var.name, "vpc-data-subnet"])
-  new_bits           = "2"
-  source             = "./modules/vpc_subnets"
-  subnet_cidr        = cidrsubnet(var.cidr_block, var.data_subnet_tier_bits == null ? var.subnet_tier_bits : var.data_subnet_tier_bits, var.data_subnet_index)
-  tags               = merge(var.tags, tomap({"Name" = var.name}))
-  vpc_id             = module.vpc.vpc_id
+  availability_zones    = var.azs
+  enabled               = var.enabled && var.enabled_data_subnets
+  name                  = join("-", [var.name, "vpc-data-subnet"])
+  new_bits              = "2"
+  source                = "./modules/vpc_subnets"
+  explicit_subnet_cidrs = var.data_subnet_cidrs
+  subnet_cidr           = cidrsubnet(var.cidr_block, var.data_subnet_tier_bits == null ? var.subnet_tier_bits : var.data_subnet_tier_bits, var.data_subnet_index)
+  tags                  = merge(var.tags, tomap({"Name" = var.name}))
+  vpc_id                = module.vpc.vpc_id
 }
 
 # data vpc route table
@@ -38,14 +39,15 @@ resource "aws_route_table_association" "data_subnet_associations" {
 
 # vpc private subnets module
 module "vpc_private_subnets" {
-  availability_zones = var.azs
-  enabled            = var.enabled && var.enabled_private_subnets
-  name               = join("-", [var.name, "vpc-private-subnet"])
-  new_bits           = "2"
-  source             = "./modules/vpc_subnets"
-  subnet_cidr        = cidrsubnet(var.cidr_block, var.private_subnet_tier_bits == null ? var.subnet_tier_bits : var.private_subnet_tier_bits, var.private_subnet_index)
-  tags               = merge(var.tags, tomap({"Name" = var.name}))
-  vpc_id             = module.vpc.vpc_id
+  availability_zones    = var.azs
+  enabled               = var.enabled && var.enabled_private_subnets
+  name                  = join("-", [var.name, "vpc-private-subnet"])
+  new_bits              = "2"
+  source                = "./modules/vpc_subnets"
+  explicit_subnet_cidrs = var.private_subnet_cidrs
+  subnet_cidr           = cidrsubnet(var.cidr_block, var.private_subnet_tier_bits == null ? var.subnet_tier_bits : var.private_subnet_tier_bits, var.private_subnet_index)
+  tags                  = merge(var.tags, tomap({"Name" = var.name}))
+  vpc_id                = module.vpc.vpc_id
 }
 
 # private vpc route table
@@ -65,14 +67,15 @@ resource "aws_route_table_association" "private_subnet_associations" {
 
 # vpc public subnets module
 module "vpc_public_subnets" {
-  availability_zones = var.azs
-  enabled            = var.enabled && var.enabled_public_subnets
-  name               = join("-", [var.name, "vpc-public-subnet"])
-  new_bits           = "2"
-  source             = "./modules/vpc_subnets"
-  subnet_cidr        = cidrsubnet(var.cidr_block, var.public_subnet_tier_bits == null ? var.subnet_tier_bits : var.public_subnet_tier_bits, var.public_subnet_index)
-  tags               = merge(var.tags, tomap({"Name" = var.name}))
-  vpc_id             = module.vpc.vpc_id
+  availability_zones    = var.azs
+  enabled               = var.enabled && var.enabled_public_subnets
+  name                  = join("-", [var.name, "vpc-public-subnet"])
+  new_bits              = "2"
+  source                = "./modules/vpc_subnets"
+  explicit_subnet_cidrs = var.public_subnet_cidrs
+  subnet_cidr           = cidrsubnet(var.cidr_block, var.public_subnet_tier_bits == null ? var.subnet_tier_bits : var.public_subnet_tier_bits, var.public_subnet_index)
+  tags                  = merge(var.tags, tomap({"Name" = var.name}))
+  vpc_id                = module.vpc.vpc_id
 }
 
 # public vpc route table
@@ -101,14 +104,15 @@ resource "aws_route" "this" {
 
 # vpc tgw subnets module
 module "vpc_tgw_subnets" {
-  availability_zones = var.azs
-  enabled            = var.enabled && var.enabled_tgw_subnets
-  name               = join("-", [var.name, "vpc-tgw-subnet"])
-  new_bits           = "2"
-  source             = "./modules/vpc_subnets"
-  subnet_cidr        = cidrsubnet(var.cidr_block, var.tgw_subnet_tier_bits == null ? var.subnet_tier_bits : var.tgw_subnet_tier_bits, var.tgw_subnet_index)
-  tags               = merge(var.tags, tomap({"Name" = var.name}))
-  vpc_id             = module.vpc.vpc_id
+  availability_zones    = var.azs
+  enabled               = var.enabled && var.enabled_tgw_subnets
+  name                  = join("-", [var.name, "vpc-tgw-subnet"])
+  new_bits              = "2"
+  source                = "./modules/vpc_subnets"
+  explicit_subnet_cidrs = var.tgw_subnet_cidrs
+  subnet_cidr           = cidrsubnet(var.cidr_block, var.tgw_subnet_tier_bits == null ? var.subnet_tier_bits : var.tgw_subnet_tier_bits, var.tgw_subnet_index)
+  tags                  = merge(var.tags, tomap({"Name" = var.name}))
+  vpc_id                = module.vpc.vpc_id
 }
 
 # tgw vpc route table

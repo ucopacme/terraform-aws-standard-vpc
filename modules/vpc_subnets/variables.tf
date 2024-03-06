@@ -24,6 +24,12 @@ variable "subnet_cidr" {
   description = "Subnet CIDR prefix"
 }
 
+variable "explicit_subnet_cidrs" {
+  default     = null
+  type        = list(string)
+  description = "Explcit list of CIDRs to assign to subnets (alternative to embedded cidrsubnet calls)"
+}
+
 variable "tags" {
   default     = {}
   description = "A map of tags to add to all resources"
