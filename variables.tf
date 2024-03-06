@@ -117,6 +117,30 @@ variable "subnet_tier_bits" {
   description = "number of bits to allocate to subnet tiers, 3 means 8 different tier blocks"
 }
 
+variable "public_subnet_tier_bits" {
+  default     = null
+  type        = number
+  description = "number of bits to allocate to public subnet tier (instead of using generic subnet_tier_bits)"
+}
+
+variable "tgw_subnet_tier_bits" {
+  default     = null
+  type        = number
+  description = "number of bits to allocate to tgw subnet tier (instead of using generic subnet_tier_bits)"
+}
+
+variable "private_subnet_tier_bits" {
+  default     = null
+  type        = number
+  description = "number of bits to allocate to private subnet tier (instead of using generic subnet_tier_bits)"
+}
+
+variable "data_subnet_tier_bits" {
+  default     = null
+  type        = number
+  description = "number of bits to allocate to data subnet tier (instead of using generic subnet_tier_bits)"
+}
+
 variable "tags" {
   default     = {}
   description = "A map of tags to add to all resources"
