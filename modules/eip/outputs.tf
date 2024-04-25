@@ -3,3 +3,7 @@ output "allocation_id" {
   value       = join("", aws_eip.this.*.id)
 }
 
+output "public_ip" {
+  description = "Public IP address"
+  value       = join("", aws_eip.this.*.public_ip)
+}
